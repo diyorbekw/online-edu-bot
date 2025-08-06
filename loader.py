@@ -1,11 +1,14 @@
 from aiogram import Bot, Dispatcher
+
+from baza.postgresql import Database
 from data import config
-from baza.sqlite import Database
 
 ADMINS = config.ADMINS
 TOKEN = config.BOT_TOKEN
 CHANNELS = config.CHANNELS
+GROUP = config.GROUP_ID
+CHANNEL_ID = config.CHANNEL_ID
 
 bot = Bot(TOKEN)
-db = Database(path_to_db="main.db")
+db = Database()
 dp = Dispatcher()

@@ -1,6 +1,8 @@
-from data.config import CHANNELS
-from aiogram import filters,Bot
+from aiogram import Bot, filters
 from aiogram.types import Message
+
+from data.config import CHANNELS
+
 
 class IsCheckSubChannels(filters.Filter):
 

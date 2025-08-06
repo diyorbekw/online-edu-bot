@@ -1,7 +1,3 @@
-from filters.check_sub_channel import IsCheckSubChannels
-from loader import bot,dp,CHANNELS
-from aiogram.utils.keyboard import InlineKeyboardBuilder
-from aiogram.types import Message,InlineKeyboardButton
 
 # @dp.message(IsCheckSubChannels())
 # async def kanalga_obuna(message:Message):

@@ -1,11 +1,12 @@
-from loader import dp,bot,db,ADMINS
-from aiogram import Bot,Dispatcher
-from aiogram import F
 import asyncio
 import logging
 import sys
 import handlers
-from menucommands.set_bot_commands  import set_default_commands
+from aiogram import Bot, Dispatcher
+
+from loader import ADMINS, bot, dp
+from menucommands.set_bot_commands import set_default_commands
+
 
 #bot ishga tushganini xabarini yuborish
 @dp.startup()
@@ -37,7 +38,6 @@ def setup_middlewares(dispatcher: Dispatcher, bot: Bot) -> None:
 
 async def main() -> None:
     await set_default_commands(bot)
-    db.create_table_users()
     setup_middlewares(dispatcher=dp, bot=bot)
     await dp.start_polling(bot)
 

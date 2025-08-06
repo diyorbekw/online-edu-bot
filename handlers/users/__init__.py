@@ -1,6 +1,15 @@
-from . import start
-from . import admin
-from . import help
-from . import about
-from . import xabar
-
+from . import (
+    about,
+    admin,
+    category_handler,
+    faq_handler,
+    feedback_handler,
+    help,
+    lessons_handler,
+    main_menu_handler,
+    questions_handler,
+    start,
+    statistics_handler,
+    subscription_handler,
+    videos_handler,
+)
