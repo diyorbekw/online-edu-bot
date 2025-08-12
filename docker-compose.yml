@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres:16
-    container_name: coffee_ai_backend_db
+    container_name: online_edu_db
     restart: always
     environment:
       POSTGRES_DB: ${DB_NAME}
@@ -21,6 +21,7 @@ services:
 
   bot:
     build: .
+    container_name: online_edu_bot
     command: python3 bot.py
     volumes:
       - .:/app
@@ -29,8 +30,8 @@ services:
     network:
       - online_edu_network
 
-volumes:
-  pgdata:
+volumes:  
+  postgres_data:
 
 networks:
-  - online 
+  online_edu_network:
