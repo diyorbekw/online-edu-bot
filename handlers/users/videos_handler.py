@@ -1,7 +1,18 @@
 from aiogram import F
 from aiogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
-
 from loader import CHANNEL_ID, bot, db, dp
+
+def get_category_keyboard():
+    categories = db.get_all_categories()
+    buttons = [
+        [InlineKeyboardButton(text=category[1], callback_data=f"category_{category[0]}")] 
+        for category in categories
+    ]
+    buttons.append([InlineKeyboardButton(text="🔙 Orqaga", callback_data="main_menu")])
+    
+    keyboard = InlineKeyboardMarkup(inline_keyboard=buttons)
+    
+    return keyboard
 
 
 @dp.callback_query(F.data.startswith('lesson_'))
@@ -16,7 +27,7 @@ async def send_video_handler(callback: CallbackQuery):
     
     end_button = InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton(text="🔙 Orqaga", callback_data="back_to_categories"),
+            [InlineKeyboardButton(text="🔙 Orqaga", callback_data="back_to_categories_2"),
             InlineKeyboardButton(text="✅ Testni boshlash", callback_data=f"questions_{video[0][0]}")]
         ]
     )
@@ -39,3 +50,11 @@ async def send_video_handler(callback: CallbackQuery):
         await callback.message.delete()
     except Exception as e:
         await callback.answer(f"Xatolik yuz berdi: {str(e)}")
+        
+@dp.callback_query(F.data == "back_to_categories_2")
+async def back_to_categories_2(callback: CallbackQuery):
+    await callback.message.delete()
+    await callback.message.answer(
+        text="Darsliklar bo'limi.\nO'zingizga yoqgan mavzuni tanlang va darslarni tomosha qiling!",
+        reply_markup=get_category_keyboard()
+    )
