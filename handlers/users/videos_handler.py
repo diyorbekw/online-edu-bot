@@ -16,7 +16,8 @@ async def send_video_handler(callback: CallbackQuery):
     
     end_button = InlineKeyboardMarkup(
         inline_keyboard=[
-            [InlineKeyboardButton(text="✅ Testni boshlash", callback_data=f"questions_{video[0][0]}")]
+            [InlineKeyboardButton(text="🔙 Orqaga", callback_data="back_to_categories"),
+            InlineKeyboardButton(text="✅ Testni boshlash", callback_data=f"questions_{video[0][0]}")]
         ]
     )
     
