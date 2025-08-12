@@ -1,6 +1,36 @@
 services:
+  db:
+    image: postgres:16
+    container_name: coffee_ai_backend_db
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    env_file:
+      - '.env'
+    network:
+      - online_edu_network
+
   bot:
     build: .
     command: python3 bot.py
     volumes:
       - .:/app
+    depends_on:
+      - db
+    network:
+      - online_edu_network
+
+volumes:
+  pgdata:
+
+networks:
+  - online 
